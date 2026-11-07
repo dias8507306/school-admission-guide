@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<title>НЗМ мен БИЛ-ге түсу гайды 2027 · EduApp App</title>
+<link rel="stylesheet" href="fonts/montserrat.css">
+<style>
+/* EduApp App: purple gradient, deep ink, lavender paper, yellow accent (placeholder brand palette). */
+:root {
+  --p1: #9B6BFF;
+  --p2: #7336F7;
+  --p3: #4A1BB0;
+  --ink: #1E1640;
+  --muted: #5B5378;
+  --paper: #F5F0FF;
+  --lav: #E9E0FF;
+  --line: #DCCFFF;
+  --yellow: #FFD84D;
+  --yellow-ink: #6B4E00;
+  --green: #1F9D57;
+  --red: #E0473B;
+  --white: #FFFFFF;
+}
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.5;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  background: #ccc;
+}
+.page {
+  width: 210mm;
+  height: 297mm;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  padding: 30mm 15mm 18mm;
+  page-break-after: always;
+  break-after: page;
+  display: flex;
+  flex-direction: column;
+  gap: 6mm;
+}
+.page:last-child { page-break-after: auto; break-after: auto; }
+
+/* Running header and footer */
+.top {
+  position: absolute; left: 15mm; right: 15mm; top: 10mm;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.brand { display: flex; align-items: center; gap: 2.6mm; font-weight: 800; font-size: 11pt; }
+.brand svg { width: 9mm; height: 9mm; }
+.chip {
+  font-size: 8pt; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 1.4mm 3.4mm; border-radius: 99px; background: var(--ink); color: var(--white);
+}
+.chip.nis { background: var(--p2); }
+.chip.bil { background: var(--green); }
+.chip.prep { background: var(--yellow); color: var(--ink); }
+.foot {
+  position: absolute; left: 15mm; right: 15mm; bottom: 8mm;
+  display: flex; justify-content: space-between; font-size: 7.6pt; color: var(--muted); font-weight: 600;
+}
+.foot .n { font-weight: 800; color: var(--p2); }
+
+/* Type */
+h1, h2, h3, h4 { margin: 0; line-height: 1.15; }
+h2.title { font-size: 24pt; font-weight: 900; letter-spacing: -0.01em; }
+h2.title em { font-style: normal; color: var(--p2); }
+.lead { font-size: 11.5pt; color: var(--muted); font-weight: 500; max-width: 165mm; }
+h3 { font-size: 13pt; font-weight: 800; }
+h4 { font-size: 11pt; font-weight: 800; }
+p { margin: 0; }
+ul, ol { margin: 0; padding-left: 5mm; }
+li { margin-bottom: 1.2mm; }
+b, strong { font-weight: 800; }
+.small { font-size: 9.4pt; color: var(--muted); }
+.src { font-size: 7.6pt; color: var(--muted); font-weight: 600; margin-top: auto; }
+
+/* Blocks */
+.card { background: var(--white); border: 1px solid var(--line); border-radius: 5mm; padding: 5.5mm 6mm; }
+.card.purple { background: linear-gradient(135deg, var(--p1), var(--p2) 55%, var(--p3)); color: var(--white); border: 0; }
+.card.purple .small { color: rgba(255,255,255,0.82); }
+.card.yellow { background: var(--yellow); border: 0; }
+.card.lav { background: var(--lav); border: 0; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5mm; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; }
+.stack { display: flex; flex-direction: column; gap: 4mm; }
+.kpi { font-size: 26pt; font-weight: 900; line-height: 1; }
+.kpi small { font-size: 11pt; font-weight: 800; }
+.tag { display: inline-block; font-size: 7.6pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.8mm 2.4mm; border-radius: 99px; background: var(--lav); color: var(--p3); }
+.tag.y { background: var(--yellow); color: var(--ink); }
+.tag.g { background: #DDF5E7; color: #146B3B; }
+.tag.r { background: #FDE3E1; color: #9E2A21; }
+.note { border-left: 2.2mm solid var(--yellow); background: var(--white); padding: 3.5mm 4.5mm; border-radius: 0 4mm 4mm 0; }
+.warn { border-left-color: var(--red); }
+
+/* Tables */
+table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--white); border-radius: 4mm; overflow: hidden; border: 1px solid var(--line); font-size: 10pt; }
+th { background: var(--ink); color: var(--white); text-align: left; font-weight: 800; padding: 3mm 3.4mm; font-size: 9pt; }
+td { padding: 2.9mm 3.4mm; border-top: 1px solid var(--line); vertical-align: top; }
+tr.total td { background: var(--lav); font-weight: 800; }
+table.dense td { padding: 1.9mm 3mm; }
+table.dense th { padding: 2.4mm 3mm; }
+table.dense.tight td { padding: 1.45mm 3mm; }
+td.num, th.num { text-align: center; font-variant-numeric: tabular-nums; }
+table.compare td:first-child { font-weight: 800; color: var(--p3); width: 30mm; }
+
+/* Steps */
+.steps { display: flex; flex-direction: column; gap: 3.2mm; }
+.step { display: grid; grid-template-columns: 12mm 1fr; gap: 4mm; align-items: start; }
+.step .no { width: 12mm; height: 12mm; border-radius: 3.2mm; background: var(--p2); color: var(--white); display: grid; place-items: center; font-weight: 900; font-size: 13pt; }
+.step.y .no { background: var(--yellow); color: var(--ink); }
+
+/* Timeline */
+.tl { position: relative; display: flex; flex-direction: column; gap: 3.2mm; padding-left: 9mm; }
+.tl::before { content: ""; position: absolute; left: 3mm; top: 2mm; bottom: 2mm; width: 1mm; background: var(--line); border-radius: 1mm; }
+.tl .ev { position: relative; display: grid; grid-template-columns: 44mm 1fr auto; gap: 4mm; align-items: center; background: var(--white); border: 1px solid var(--line); border-radius: 4mm; padding: 3.4mm 4.5mm; }
+.tl .ev::before { content: ""; position: absolute; left: -8.2mm; top: 50%; width: 4mm; height: 4mm; margin-top: -2mm; border-radius: 50%; background: var(--white); border: 1mm solid var(--p2); }
+.tl .ev.bil::before { border-color: var(--green); }
+.tl .ev.key { background: var(--ink); color: var(--white); border: 0; }
+.tl .ev.key::before { background: var(--yellow); border-color: var(--yellow); }
+.tl .d { font-weight: 900; font-size: 11pt; font-variant-numeric: tabular-nums; }
+
+/* Bars */
+.bars { display: flex; flex-direction: column; gap: 3mm; }
+.bar { display: grid; grid-template-columns: 50mm 1fr 28mm; gap: 3mm; align-items: center; font-size: 9pt; font-weight: 700; }
+.bar .track { height: 7mm; background: var(--lav); border-radius: 2mm; overflow: hidden; }
+.bar .fill { height: 100%; background: linear-gradient(90deg, var(--p1), var(--p2)); border-radius: 2mm; }
+.bar .v { font-weight: 900; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Flow chain */
+.chain { display: flex; align-items: stretch; gap: 2mm; }
+.chain .c { flex: 1; background: var(--white); border: 1px solid var(--line); border-radius: 3.5mm; padding: 3mm; font-weight: 800; font-size: 9pt; text-align: center; display: grid; place-items: center; }
+.chain .c:first-child { background: var(--p2); color: var(--white); border: 0; }
+.chain .arr { display: grid; place-items: center; font-weight: 900; color: var(--p2); font-size: 14pt; }
+
+/* Compare task */
+.cmp { display: grid; grid-template-columns: 10mm 1fr 1fr 24mm; border: 1px solid var(--line); border-radius: 3.5mm; overflow: hidden; background: var(--white); font-size: 11pt; }
+.cmp div { padding: 3.2mm 3.4mm; border-top: 1px solid var(--line); }
+.cmp .h { background: var(--ink); color: var(--white); font-weight: 800; border-top: 0; font-size: 8.4pt; }
+.cmp .ans { font-weight: 900; color: var(--green); text-align: center; }
+
+/* Section divider */
+.divider { background: linear-gradient(150deg, var(--p1) 0%, var(--p2) 45%, var(--p3) 100%); color: var(--white); justify-content: center; }
+.divider .big { font-size: 54pt; font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; }
+.divider .big span { color: var(--yellow); }
+.divider .sub { font-size: 13pt; font-weight: 600; max-width: 150mm; opacity: 0.92; }
+.divider .list { display: grid; gap: 2.4mm; font-weight: 700; font-size: 11pt; }
+.divider .list div { display: flex; gap: 3mm; align-items: baseline; }
+.divider .list b { color: var(--yellow); font-variant-numeric: tabular-nums; }
+.planet { position: absolute; border-radius: 50%; }
+
+/* Cover */
+.cover { background: radial-gradient(120% 80% at 85% 10%, var(--p1) 0%, var(--p2) 45%, var(--p3) 100%); color: var(--white); padding: 16mm 15mm; justify-content: space-between; }
+.cover .brand { font-size: 15pt; }
+.cover .brand svg { width: 14mm; height: 14mm; }
+.cover h1 { font-size: 46pt; font-weight: 900; line-height: 0.98; letter-spacing: -0.02em; }
+.cover h1 span { color: var(--yellow); display: block; font-size: 64pt; }
+.pill { display: inline-block; background: var(--ink); color: var(--white); font-weight: 800; padding: 2.6mm 5mm; border-radius: 3mm; font-size: 11pt; letter-spacing: 0.02em; }
+.pill.y { background: var(--yellow); color: var(--ink); }
+
+/* TOC */
+.toc { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.toc .grp { background: var(--white); border: 1px solid var(--line); border-radius: 5mm; padding: 4.5mm 5mm; }
+.toc .row { display: flex; justify-content: space-between; gap: 3mm; padding: 1.4mm 0; border-bottom: 1px dashed var(--line); font-weight: 600; font-size: 9.4pt; }
+.toc .row:last-child { border-bottom: 0; }
+.toc .row b { color: var(--p2); font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<!-- reusable logo -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="zg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9B6BFF"/><stop offset=".55" stop-color="#7336F7"/><stop offset="1" stop-color="#4A1BB0"/></linearGradient>
+    <linearGradient id="zh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <symbol id="logo" viewBox="0 0 192 192"><rect x="4" y="4" width="184" height="184" rx="44" fill="url(#zg)"/><rect x="4" y="4" width="184" height="184" rx="44" fill="url(#zh)"/><text x="96" y="124" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="84" font-weight="900" fill="#fff">EA</text></symbol>
+  </defs>
+</svg>
+
+<!-- 1. Cover -->
+<section class="page cover">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <div class="brand"><svg><use href="#logo"/></svg>EduApp App</div>
+    <span class="pill y">@eduapp_demo</span>
+  </div>
+  <div class="planet" style="width:62mm;height:62mm;right:-22mm;top:38mm;background:radial-gradient(circle at 35% 30%,#FFE98A,#FFB800);box-shadow:0 0 0 6mm rgba(255,255,255,0.08)"></div>
+  <div class="planet" style="width:22mm;height:22mm;right:58mm;top:212mm;background:radial-gradient(circle at 35% 30%,#7FD4FF,#2F7CF6)"></div>
+  <div class="planet" style="width:14mm;height:14mm;right:24mm;top:236mm;background:radial-gradient(circle at 35% 30%,#FF8FB8,#E0306E)"></div>
+  <div style="display:flex;flex-direction:column;gap:7mm;position:relative">
+    <span class="pill">Ата-аналарға арналған гайд</span>
+    <h1>НЗМ мен БИЛ-ге түсу<span>2027</span></h1>
+    <p style="font-size:13pt;font-weight:600;max-width:140mm;opacity:.95">Назарбаев Зияткерлік мектептері және «Білім-инновация» лицейлері: мерзімдер, құжаттар, емтихан құрылымы, шекті балдар және дайындық жоспары</p>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;font-weight:700;font-size:9.6pt;opacity:.92">
+    <div>Ресми деректер: nis.edu.kz, bilemtihan.kz<br>Қараша 2026</div>
+    <div style="text-align:right">2027–2028 оқу жылына<br>7-сыныпқа қабылдау</div>
+  </div>
+</section>
+
+<!-- 2. TOC -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip">Мазмұны</span></div>
+  <h2 class="title">Гайдта <em>не бар</em></h2>
+  <p class="lead">Гайд 2027–2028 оқу жылына 7-сыныпқа қабылдаудың ресми мәліметтеріне сүйенеді. Әр бетте дереккөзі көрсетілген.</p>
+  <div class="toc">
+    <div class="grp">
+      <h4 style="margin-bottom:2mm">Жалпы</h4>
+      <div class="row"><span>Бір қарағанда: НЗМ және БИЛ</span><b>3</b></div>
+      <div class="row"><span>Күнтізбе 2026–2027</span><b>4</b></div>
+      <h4 style="margin:4mm 0 2mm">Назарбаев Зияткерлік мектептері</h4>
+      <div class="row"><span>НЗМ туралы</span><b>6</b></div>
+      <div class="row"><span>Құжат тапсыру мерзімі мен жолы</span><b>7</b></div>
+      <div class="row"><span>eGov арқылы өтініш беру</span><b>8</b></div>
+      <div class="row"><span>Қағаз түрінде тапсыру</span><b>9</b></div>
+      <div class="row"><span>Фото талаптары, бас тарту себептері</span><b>10</b></div>
+      <div class="row"><span>Тест күндері мен шарттары</span><b>11</b></div>
+      <div class="row"><span>1-күн: қабілеттілік тесті</span><b>12</b></div>
+      <div class="row"><span>Сандық сипаттамалар деген не</span><b>13</b></div>
+      <div class="row"><span>2-күн: тілдік тест</span><b>14</b></div>
+      <div class="row"><span>Ұпай және шекті балл</span><b>15</b></div>
+      <div class="row"><span>Жауап парағы және тәртіп</span><b>16</b></div>
+      <div class="row"><span>Нәтиже және грант</span><b>17</b></div>
+      <div class="row"><span>2026 конкурсы: шекті балл мен грант</span><b>18</b></div>
+      <div class="row"><span>21 НЗМ: мекенжай мен телефон</span><b>19</b></div>
+    </div>
+    <div class="grp">
+      <h4 style="margin-bottom:2mm">«Білім-инновация» лицейлері</h4>
+      <div class="row"><span>БИЛ туралы</span><b>21</b></div>
+      <div class="row"><span>bilemtihan.kz-те тіркелу</span><b>22</b></div>
+      <div class="row"><span>Емтихан құрылымы</span><b>23</b></div>
+      <div class="row"><span>Нәтиже, апелляция, 15% квота</span><b>24</b></div>
+      <h4 style="margin:4mm 0 2mm">Дайындық</h4>
+      <div class="row"><span>Дайындық жоспары: қарашадан мамырға дейін</span><b>26</b></div>
+      <div class="row"><span>Уақытты бөлу: бір сұраққа қанша уақыт</span><b>27</b></div>
+      <div class="row"><span>Сәтті үміткерлердің кеңесі</span><b>28</b></div>
+      <div class="row"><span>Ата-анаға: қолдау және тест күні</span><b>29</b></div>
+      <div class="row"><span>«8 планета»: EduApp App-тағы дайындық</span><b>30</b></div>
+      <div class="row"><span>Дереккөздер</span><b>31</b></div>
+    </div>
+  </div>
+  <div class="note"><b>Маңызды.</b> Мерзімдер мен ережелер өзгеруі мүмкін. Құжат тапсырар алдында nis.edu.kz және bilemtihan.kz сайттарынан тексеріңіз.</div>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">2</span></div>
+</section>
+
+<!-- 3. At a glance -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip">Жалпы</span></div>
+  <h2 class="title">Бір қарағанда: <em>НЗМ және БИЛ</em></h2>
+  <p class="lead">Екі мектепке де 7-сыныпқа қабылдайды. Емтихандардың күні әртүрлі, сондықтан екеуіне де тапсыруға болады.</p>
+  <table class="compare">
+    <tr><th></th><th>НЗМ</th><th>БИЛ</th></tr>
+    <tr><td>Тіркелу</td><td><b>23.11 – 28.12.2026</b><br>eGov.kz немесе қабылдау комиссиясы</td><td><b>02.11.2026 – 02.04.2027</b><br>тек bilemtihan.kz</td></tr>
+    <tr><td>Емтихан</td><td><b>26 және 27 наурыз 2027</b>, екі күн</td><td><b>2 мамыр 2027</b>, бір күн</td></tr>
+    <tr><td>Тест көлемі</td><td>1-күн: 120 тапсырма, 120 минут<br>2-күн: 60 тапсырма, 120 минут</td><td>60 сұрақ, 110 минут</td></tr>
+    <tr><td>Пәндер</td><td>Математика, сандық сипаттамалар, жаратылыстану; қазақ, орыс, ағылшын тілдері</td><td>Математика және логика (50 сұрақ), оқу сауаттылығы (10 сұрақ)</td></tr>
+    <tr><td>Тіл</td><td>Өтініште оқыту тілі таңдалады: қазақ немесе орыс. Жауап парағында тестілеу тілі белгіленеді</td><td>Қазақ немесе орыс</td></tr>
+    <tr><td>Шекті балл</td><td>Математика — 140 (35%)<br>Сандық сипаттамалар — 120 (40%)</td><td>Жоқ: ең жоғары балл жинағандар рейтинг бойынша алынады</td></tr>
+    <tr><td>Нәтиже</td><td>Тесттен кейін 40 күн ішінде, nis.edu.kz</td><td>10 мамыр 2027, bilemtihan.kz жеке кабинеті</td></tr>
+    <tr><td>Апелляция</td><td>Өткізілмейді</td><td>Бар, лицей өкілі арқылы</td></tr>
+    <tr><td>Ақысы</td><td>Президенттің «Өркен» гранты оқу ақысын төлейді</td><td>Емтихан тегін, ақылы бөлім жоқ</td></tr>
+  </table>
+  <div class="grid3">
+    <div class="card purple"><div class="kpi">2</div><p style="font-weight:700">күн тест — НЗМ</p></div>
+    <div class="card yellow"><div class="kpi">1500</div><p style="font-weight:700">НЗМ-дегі ең жоғары балл</p></div>
+    <div class="card"><div class="kpi" style="color:var(--green)">60</div><p style="font-weight:700">сұрақ — БИЛ емтиханы</p></div>
+  </div>
+  <p class="src">Дереккөз: nis.edu.kz — хабарлама, буклет (19.10.2026), «Өркен» ережесі мен өтініш нысаны (22.09.2026), үш тілде оқыту саясаты; bilemtihan.kz (07.11.2026).</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">3</span></div>
+</section>
+
+<!-- 4. Calendar -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip">Жалпы</span></div>
+  <h2 class="title">Күнтізбе <em>2026–2027</em></h2>
+  <p class="lead">Күлгін нүкте — НЗМ, жасыл нүкте — БИЛ. Қара жолдар — ең маңызды күндер.</p>
+  <div class="tl">
+    <div class="ev bil"><span class="d">2 қараша 2026</span><span>БИЛ-ге тіркелу басталды, bilemtihan.kz</span><span class="tag g">БИЛ</span></div>
+    <div class="ev key"><span class="d">23 қараша 2026</span><span>09:00-ден НЗМ-ге құжат қабылдау басталады</span><span class="tag y">НЗМ</span></div>
+    <div class="ev key"><span class="d">28 желтоқсан 2026</span><span>18:00-де НЗМ-ге құжат қабылдау аяқталады</span><span class="tag y">НЗМ</span></div>
+    <div class="ev"><span class="d">26 наурыз 2027</span><span>НЗМ, 1-күн: математика, сандық сипаттамалар, жаратылыстану</span><span class="tag">НЗМ</span></div>
+    <div class="ev"><span class="d">27 наурыз 2027</span><span>НЗМ, 2-күн: қазақ, орыс, ағылшын тілдері</span><span class="tag">НЗМ</span></div>
+    <div class="ev bil"><span class="d">2 сәуір 2027</span><span>БИЛ-ге тіркелудің соңғы күні</span><span class="tag g">БИЛ</span></div>
+    <div class="ev key"><span class="d">2 мамыр 2027</span><span>БИЛ емтиханы</span><span class="tag y">БИЛ</span></div>
+    <div class="ev"><span class="d">6 мамырға дейін</span><span>НЗМ нәтижелері: тесттің екінші күнінен кейін 40 күнтізбелік күн ішінде</span><span class="tag">НЗМ</span></div>
+    <div class="ev bil"><span class="d">10 мамыр 2027</span><span>БИЛ нәтижелері, bilemtihan.kz жеке кабинеті</span><span class="tag g">БИЛ</span></div>
+  </div>
+  <div class="note"><b>Есептеу:</b> 27 наурыз + 40 күнтізбелік күн = 6 мамыр 2027. Ресми хабарламада «40 күнтізбелік күннен кешіктірілмей» деп жазылған.</div>
+  <p class="src">Дереккөз: nis.edu.kz «Конкурс жөнінде хабарлама», НЗМ ақпараттық буклеті (19.10.2026), bilemtihan.kz.</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">4</span></div>
+</section>
+
+<!-- 5. Divider NIS -->
+<section class="page divider">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip y" style="background:var(--yellow);color:var(--ink)">1-бөлім</span></div>
+  <div class="planet" style="width:90mm;height:90mm;right:-25mm;top:30mm;background:radial-gradient(circle at 35% 30%,#B99BFF,#5B2AD6);opacity:.55"></div>
+  <div class="stack" style="gap:8mm;position:relative">
+    <div class="big">Назарбаев<br>Зияткерлік<br>мектептері <span>(НЗМ)</span></div>
+    <p class="sub">Құжат тапсырудан нәтижеге дейін: 2027–2028 оқу жылына 7-сыныпқа конкурстық іріктеу</p>
+    <div class="list">
+      <div><b>06</b>НЗМ туралы</div>
+      <div><b>07</b>Құжат тапсыру мерзімі мен жолы</div>
+      <div><b>11</b>Тест күндері мен шарттары</div>
+      <div><b>12</b>Тест құрылымы</div>
+      <div><b>15</b>Ұпай және шекті балл</div>
+      <div><b>18</b>21 НЗМ: мекенжай мен телефон</div>
+    </div>
+  </div>
+  <div class="foot" style="color:rgba(255,255,255,.75)"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n" style="color:var(--yellow)">5</span></div>
+</section>
+
+<!-- 6. About NIS -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">НЗМ <em>туралы</em></h2>
+  <p class="lead">Қазақстанда 21 Назарбаев Зияткерлік мектебі бар. 7-сыныпқа оқушылар конкурстық іріктеу арқылы қабылданады.</p>
+  <div class="grid2">
+    <div class="card"><h3>Кім тапсырады</h3><p style="margin-top:2mm">2027–2028 оқу жылында 7-сыныпта оқитын, яғни қазір 6-сыныпта оқитын балалар.</p></div>
+    <div class="card"><h3>Не береді</h3><p style="margin-top:2mm">Конкурс жеңімпаздарына Қазақстан Республикасы Президентінің «Өркен» білім беру гранты тағайындалады.</p></div>
+    <div class="card"><h3>Іріктеу жүйесі</h3><p style="margin-top:2mm">2013 жылы Cito Педагогикалық өлшеулер институты (Нидерланд) және Джонс Хопкинс университетінің Дарынды жастар орталығымен (CTY, АҚШ) бірге жасалған.</p></div>
+    <div class="card"><h3>Не тексереді</h3><p style="margin-top:2mm">Негізгі бағыт — баланың жаратылыстану-математикалық бағыттағы пәндерді меңгеру қабілеті.</p></div>
+  </div>
+  <div class="card">
+    <h3>Конкурсқа өтінім берген оқушылар</h3>
+    <div style="display:flex;align-items:baseline;gap:4mm;margin:3mm 0 4mm">
+      <span class="kpi" style="color:var(--p2)">29 310</span>
+      <span class="small" style="font-weight:700">оқушы 2026 жылғы конкурсқа (2026–2027 оқу жылына) өтінім берді</span>
+    </div>
+    <h4 style="margin-bottom:3mm">Оның ішінде ауыл мектептерінің оқушылары</h4>
+    <div class="bars">
+      <div class="bar"><span>2024–2025 оқу жылы</span><div class="track"><div class="fill" style="width:67.8%"></div></div><span class="v">3 144</span></div>
+      <div class="bar"><span>2025–2026 оқу жылы</span><div class="track"><div class="fill" style="width:93.6%"></div></div><span class="v">4 342</span></div>
+      <div class="bar"><span>2026–2027 оқу жылы</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="v">4 640</span></div>
+    </div>
+    <p class="small" style="margin-top:3mm">Ауыл мектептерінен келетін үміткерлер саны жыл сайын өсіп келеді.</p>
+  </div>
+  <p class="src">Дереккөз: НЗМ ақпараттық буклеті (19.10.2026), nis.edu.kz; өтінім саны — НЗМ баспасөз қызметі, kaz.nur.kz (30.03.2026).</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">6</span></div>
+</section>
+
+<!-- 7. Submission -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">Құжат тапсыру: <em>мерзімі мен жолы</em></h2>
+  <div class="card purple">
+    <span class="tag y">Мерзім</span>
+    <div class="kpi" style="margin-top:3mm">23 қараша – 28 желтоқсан <small>2026, қоса алғанда</small></div>
+  </div>
+  <p class="lead">Құжатты екі жолмен тапсыруға болады. Біреуін ғана таңдаңыз: бір балаға бір өтініш.</p>
+  <div class="grid2">
+    <div class="card">
+      <span class="tag">1-жол</span>
+      <h3 style="margin:2.5mm 0 2mm">eGov.kz арқылы</h3>
+      <ul>
+        <li>Тәулік бойы, техникалық үзілістерден басқа</li>
+        <li>23 қараша, <b>09:00</b>-ден бастап</li>
+        <li>28 желтоқсан, <b>18:00</b>-ге дейін</li>
+        <li>eGov mobile қосымшасы арқылы да болады</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">2-жол</span>
+      <h3 style="margin:2.5mm 0 2mm">Қағаз түрінде</h3>
+      <ul>
+        <li>НЗМ қабылдау комиссиясына</li>
+        <li>Дүйсенбі–жұма, <b>09:00–18:00</b></li>
+        <li>Түскі үзіліс: 12:30–13:30</li>
+        <li>Мереке күндері қабылданбайды</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note warn"><b>Соңғы күнге қалдырмаңыз.</b> Фото немесе табель талапқа сай болмаса, құжат қабылданбайды. Қайта тапсыруға уақыт керек болады.</div>
+  <div class="note"><b>Тест күндері:</b> үміткерде түрлі-түсті принтерде басып шығарылған рұқсат қағазы болуы керек.</div>
+  <p class="src">Дереккөз: nis.edu.kz «Конкурс жөнінде хабарлама», «Құжаттар тізімі».</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">7</span></div>
+</section>
+
+<!-- 8. eGov steps -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">eGov арқылы <em>өтініш беру</em></h2>
+  <p class="lead">Онлайн тапсырған ыңғайлы: туу туралы куәлік пен жеке куәліктің мәліметін мектеп мемлекеттік жүйелерден өзі алады.</p>
+  <div class="steps">
+    <div class="step"><span class="no">1</span><div class="card"><h4>eGov.kz-ке кіріп, «Онлайн сұрау» батырмасын басыңыз</h4><p class="small" style="margin-top:1mm">НЗМ-ге құжат қабылдау қызметін ашыңыз.</p></div></div>
+    <div class="step"><span class="no">2</span><div class="card"><h4>Өтінішті толтырып, қол қойыңыз</h4><p class="small" style="margin-top:1mm">Қол қою тәсілдері: ЭЦҚ, SMS-құпия сөз, QR-код немесе бұлтты ЭЦҚ. SMS-құпия сөз үшін нөміріңіз мобильді азаматтар деректер базасында тіркелген болуы керек.</p></div></div>
+    <div class="step"><span class="no">3</span><div class="card"><h4>Жауабын тексеріңіз</h4><p class="small" style="margin-top:1mm">Жеке кабинеттегі «Қызметтерді алу тарихы» бөлімінде өтініш туралы хабарлама келеді.</p></div></div>
+  </div>
+  <div class="card lav">
+    <h3>eGov-қа тіркейтін құжаттар</h3>
+    <ul style="margin-top:2mm">
+      <li>Конкурсқа қатысуға өтініш және заңды өкілдің ЭЦҚ қойылған келісімі</li>
+      <li>Үміткердің түрлі-түсті цифрлық фотосуреті (талаптары — 10-бетте)</li>
+      <li>Шетелдегі мектепте оқитындарға: табельдің немесе анықтаманың түрлі-түсті көшірмесі (мемлекеттік не орыс тілінде, болмаса нотариалды аудармасымен)</li>
+    </ul>
+  </div>
+  <p class="src">Дереккөз: nis.edu.kz «Құжаттар тізімі».</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">8</span></div>
+</section>
+
+<!-- 9. Paper -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">Қағаз түрінде <em>тапсыру</em></h2>
+  <p class="lead">Барлық құжат пластик папкаға тігіліп тапсырылады. Өтініш пен сауалнама нысандарын nis.edu.kz сайтынан жүктеуге болады.</p>
+  <div class="steps">
+    <div class="step y"><span class="no">1</span><div class="card"><h4>Өтініш</h4></div></div>
+    <div class="step y"><span class="no">2</span><div class="card"><h4>Сауалнама</h4></div></div>
+    <div class="step y"><span class="no">3</span><div class="card"><h4>Үміткердің туу туралы куәлігі немесе жеке басын растайтын құжаты</h4><p class="small" style="margin-top:1mm">Түпнұсқасы сәйкестендіру үшін керек, қолыңызға қайтарылады. Цифрлық құжаттар сервисіндегі электрондық құжат та жарайды.</p></div></div>
+    <div class="step y"><span class="no">4</span><div class="card"><h4>Заңды өкілдің жеке басын растайтын құжаты</h4><p class="small" style="margin-top:1mm">Түпнұсқасы қайтарылады, электрондық құжат та жарайды.</p></div></div>
+    <div class="step y"><span class="no">5</span><div class="card"><h4>Ағымдағы оқу жылындағы үлгерім табелінің көшірмесі</h4><p class="small" style="margin-top:1mm">Мектеп басшысының қолымен және мөрімен расталуы керек.</p></div></div>
+    <div class="step y"><span class="no">6</span><div class="card"><h4>Үміткердің түрлі-түсті цифрлық фотосуреті</h4></div></div>
+  </div>
+  <div class="note">Өтінішті ата-ананың атынан үшінші тұлға берсе, <b>сенімхат</b> керек. Қабылдау комиссиясы қажет болса, баланың Қазақстан азаматтығын растайтын құжатты сұрауы мүмкін.</div>
+  <p class="src">Дереккөз: nis.edu.kz «Құжаттар тізімі».</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">9</span></div>
+</section>
+
+<!-- 10. Photo & rejection -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">Фото талаптары және <em>бас тарту себептері</em></h2>
+  <div class="grid2">
+    <div class="card">
+      <span class="tag g">Талап</span>
+      <ul style="margin-top:3mm">
+        <li>Ақшыл фон, алдыңғы жағынан түсірілген</li>
+        <li>Бет әлпеті бейтарап, аузы жабық</li>
+        <li>Көздері ашық, шашпен жабылмаған</li>
+        <li>Бет фотосуреттің 70–85%-ын алады</li>
+        <li>JPEG, 3×4, 1 МБ-тан аспайды</li>
+        <li>Кемінде 450×600 пиксель, 80 dpi</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag r">Болмайды</span>
+      <ul style="margin-top:3mm">
+        <li>Бас киіммен түсірілген фото</li>
+        <li>Көзілдірікпен түсірілген фото</li>
+        <li>Сканерленген, модельденген немесе көшірілген сурет</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Құжат қабылданбайтын жағдайлар</h3>
+    <ol style="margin-top:2.5mm">
+      <li>Фотосурет талаптарға сай емес</li>
+      <li>Табель, анықтама немесе мектептің басқа ресми құжаты талаптарға сай емес</li>
+      <li>Өтініш немесе рұқсаттама бұрыннан бар</li>
+      <li>Құжаттардағы деректер дұрыс емес</li>
+      <li>Құжаттар мен мәліметтер талаптарға сай емес</li>
+      <li>Заңды өкіл дербес деректерге қол жеткізуге келісім бермеген</li>
+    </ol>
+  </div>
+  <div class="note warn"><b>Ең жиі кездесетін қате — фото.</b> Тапсырмас бұрын өлшемін, фонын және көлемін тексеріңіз.</div>
+  <p class="src">Дереккөз: nis.edu.kz «Құжаттар тізімі».</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">10</span></div>
+</section>
+
+<!-- 11. Test conditions -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">Тест күндері мен <em>шарттары</em></h2>
+  <div class="grid2">
+    <div class="card purple"><span class="tag y">1-күн</span><div class="kpi" style="margin-top:3mm">26 наурыз</div><p style="font-weight:700;margin-top:1mm">Қабілеттілік тесті, 120 минут</p></div>
+    <div class="card purple"><span class="tag y">2-күн</span><div class="kpi" style="margin-top:3mm">27 наурыз</div><p style="font-weight:700;margin-top:1mm">Тілдік тест, 120 минут</p></div>
+  </div>
+  <div class="card">
+    <h3>Өзімен бірге алып келеді</h3>
+    <div class="grid3" style="margin-top:3mm">
+      <div class="card lav"><h4>Рұқсат қағазы</h4><p class="small">Түрлі-түсті принтерде басып шығарылған</p></div>
+      <div class="card lav"><h4>Қара сиялы қалам</h4><p class="small">Гельді қалам болмайды</p></div>
+      <div class="card lav"><h4>Су</h4><p class="small">Жапсырмасы жоқ бөтелкеде</p></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Тест күні не болады</h3>
+    <ul style="margin-top:2.5mm">
+      <li>Үміткер белгіленген уақытта келеді, бет-әлпетті тану жүйесі мен тіркеуден өтеді.</li>
+      <li><b>Тіркеу уақыты біткен соң келген үміткер тестке жіберілмейді.</b></li>
+      <li><b>1-күнге қатыспаған үміткер 2-күнге жіберілмейді.</b></li>
+      <li>Аудитория мен орын бағдарлама арқылы автоматты түрде беріледі. Бір аудиторияда 180 үміткерге дейін отырады.</li>
+      <li>Тест басталар алдында бейненұсқаулық көрсетіледі.</li>
+      <li>Тестілеу онлайн трансляция арқылы көрсетіледі.</li>
+    </ul>
+  </div>
+  <p class="src">Дереккөз: НЗМ ақпараттық буклеті (19.10.2026).</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">11</span></div>
+</section>
+
+<!-- 12. Day 1 -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">1-күн: <em>қабілеттілік тесті</em></h2>
+  <p class="lead">Жаратылыстану-математикалық бағыттағы пәндерді меңгеру қабілетін анықтау тесті. Үш бөлім, бір отырыс.</p>
+  <table>
+    <tr><th>Бөлім</th><th class="num">Тапсырма</th><th class="num">Уақыт</th><th class="num">Ең жоғары балл</th></tr>
+    <tr><td>Математика</td><td class="num">40</td><td class="num">60 минут</td><td class="num">400</td></tr>
+    <tr><td>Сандық сипаттамалар</td><td class="num">60</td><td class="num">30 минут</td><td class="num">300</td></tr>
+    <tr><td>Жаратылыстану</td><td class="num">20</td><td class="num">30 минут</td><td class="num">200</td></tr>
+    <tr class="total"><td>Барлығы</td><td class="num">120</td><td class="num">120 минут</td><td class="num">900</td></tr>
+  </table>
+  <div class="grid2">
+    <div class="card"><h3>Тапсырмалар нені тексереді</h3><ul style="margin-top:2.5mm"><li>Сандар арасындағы байланысты көру</li><li>Математикалық және логикалық ойлау</li><li>Сурет, график, диаграммадағы деректерді түсіну</li><li>Табиғи нысандар мен процестерді деректер арқылы түсіндіру</li></ul></div>
+    <div class="card"><h3>Тапсырма форматы</h3><ul style="margin-top:2.5mm"><li>Әр тапсырмада 4 жауап нұсқасы</li><li>Тек БІР дұрыс жауап</li><li>Есеп шығару үшін тест кітапшасының бос жерлерін шимай парақ ретінде пайдалануға болады</li></ul></div>
+  </div>
+  <div class="note"><b>Назар аударыңыз:</b> сандық сипаттамалар бөліміне 60 тапсырмаға небәрі 30 минут беріледі — бір тапсырмаға 30 секунд. Бұл бөлімнің форматын келесі беттен қараңыз.</div>
+  <p class="src">Дереккөз: НЗМ ақпараттық буклеті (19.10.2026).</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">12</span></div>
+</section>
+
+<!-- 13. Quantitative comparison -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">Сандық сипаттамалар <em>деген не</em></h2>
+  <p class="lead">Бұл бөлім мектепте жеке пән ретінде оқытылмайды. Әр тапсырмада екі шама беріледі: A қатары және B қатары. Оларды салыстыру керек.</p>
+  <div class="grid2">
+    <div class="card"><span class="tag">A</span><p style="margin-top:2mm">A қатарындағы мән үлкен болса</p></div>
+    <div class="card"><span class="tag">B</span><p style="margin-top:2mm">B қатарындағы мән үлкен болса</p></div>
+    <div class="card"><span class="tag">C</span><p style="margin-top:2mm">Екі мән өзара тең болса</p></div>
+    <div class="card"><span class="tag">D</span><p style="margin-top:2mm">Жауап беру үшін ақпарат жеткіліксіз болса</p></div>
+  </div>
+  <h3>EduApp мысалдары</h3>
+  <div class="cmp">
+    <div class="h">№</div><div class="h">A қатары</div><div class="h">B қатары</div><div class="h">Жауап</div>
+    <div>1</div><div>80-нің 25%-ы</div><div>25-тің 80%-ы</div><div class="ans">C</div>
+    <div>2</div><div>2⁵</div><div>5²</div><div class="ans">A</div>
+    <div>3</div><div>x², мұнда x &gt; 0</div><div>x</div><div class="ans">D</div>
+  </div>
+  <div class="card lav">
+    <h4>Неге солай</h4>
+    <ol style="margin-top:2mm">
+      <li>80 : 4 = 20 және 25 × 0,8 = 20. Екеуі тең.</li>
+      <li>2⁵ = 32, 5² = 25. A үлкен.</li>
+      <li>x = 2 болса, A үлкен; x = 1 болса, тең; x = ½ болса, B үлкен. Жауап x-ке байланысты, сондықтан D.</li>
+    </ol>
+  </div>
+  <div class="note"><b>Кеңес:</b> шартта әріп болса, 1-ден үлкен санды, 1-ді және бөлшекті қойып көріңіз. Жауап өзгерсе — D.</div>
+  <p class="src">Ереже: НЗМ ақпараттық буклеті (19.10.2026). Мысалдарды EduApp құрастырған.</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">13</span></div>
+</section>
+
+<!-- 14. Day 2 -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">2-күн: <em>тілдік тест</em></h2>
+  <p class="lead">Оқу сауаттылығын тексереді: қазақ, орыс және ағылшын тілдеріндегі мәтіндерді түсіну мен талдау деңгейін.</p>
+  <table>
+    <tr><th>Бөлім</th><th class="num">Тапсырма</th><th class="num">Ең жоғары балл</th></tr>
+    <tr><td>Қазақ тілі (бірінші тіл)</td><td class="num">20</td><td class="num">200</td></tr>
+    <tr><td>Орыс тілі (екінші тіл)</td><td class="num">20</td><td class="num">200</td></tr>
+    <tr><td>Ағылшын тілі</td><td class="num">20</td><td class="num">200</td></tr>
+    <tr class="total"><td>Барлығы · 120 минут</td><td class="num">60</td><td class="num">600</td></tr>
+  </table>
+  <div class="grid2">
+    <div class="card"><h3>Тапсырма форматы</h3><ul style="margin-top:2.5mm"><li>Әр мәтінге 1-ден 5-ке дейін сұрақ</li><li>3 немесе 4 жауап нұсқасы</li><li>Тек БІР дұрыс жауап</li><li>Мәтіндер мен графикалық материалдар беріледі</li></ul></div>
+    <div class="card"><h3>Шекті балл</h3><p style="margin-top:2.5mm">Тілдік тест бөлімдерінде шекті балл жоқ. Бірақ балдары жалпы ұпайға қосылады және тең балл болғанда бірінші тіл ескеріледі (15-бет).</p></div>
+  </div>
+  <div class="note"><b>Уақыт:</b> 60 тапсырмаға 120 минут — бір тапсырмаға орта есеппен 2 минут.</div>
+  <p class="src">Дереккөз: НЗМ ақпараттық буклеті (19.10.2026). Буклеттегі кесте «Қазақ тілі (бірінші тіл)» және «Орыс тілі (екінші тіл)» деп берілген.</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">14</span></div>
+</section>
+
+<!-- 15. Scores -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">Ұпай және <em>шекті балл</em></h2>
+  <table>
+    <tr><th>Күн</th><th>Бөлім</th><th class="num">Тапсырма</th><th class="num">Ең жоғары</th><th class="num">Шекті балл</th></tr>
+    <tr><td rowspan="3">1</td><td>Математика</td><td class="num">40</td><td class="num">400</td><td class="num"><b>140 (35%)</b></td></tr>
+    <tr><td>Сандық сипаттамалар</td><td class="num">60</td><td class="num">300</td><td class="num"><b>120 (40%)</b></td></tr>
+    <tr><td>Жаратылыстану</td><td class="num">20</td><td class="num">200</td><td class="num">—</td></tr>
+    <tr><td rowspan="3">2</td><td>Қазақ тілі</td><td class="num">20</td><td class="num">200</td><td class="num">—</td></tr>
+    <tr><td>Орыс тілі</td><td class="num">20</td><td class="num">200</td><td class="num">—</td></tr>
+    <tr><td>Ағылшын тілі</td><td class="num">20</td><td class="num">200</td><td class="num">—</td></tr>
+    <tr class="total"><td></td><td>Ең жоғары жалпы балл</td><td class="num">180</td><td class="num">1500</td><td></td></tr>
+  </table>
+  <div class="card purple">
+    <h3>Грантқа кім жіберіледі</h3>
+    <p style="margin-top:2mm">«Өркен» грантының конкурсына математикадан кемінде 140 балл <b>және</b> сандық сипаттамалардан кемінде 120 балл жинаған үміткерлер жіберіледі. Грант мектепке бөлінген грант санына қарай, шекті балл жинап, жалпы балы ең жоғары үміткерлерге тағайындалады.</p>
+  </div>
+  <div>
+    <h3 style="margin-bottom:3mm">Жалпы балл тең болса, басымдық кімге</h3>
+    <div class="chain">
+      <div class="c">Математика</div><div class="arr">›</div>
+      <div class="c">Сандық сипаттамалар</div><div class="arr">›</div>
+      <div class="c">Жаратылыстану</div><div class="arr">›</div>
+      <div class="c">Оқыту тілі (бірінші тіл)</div>
+    </div>
+    <p class="small" style="margin-top:2mm">Алдымен математикадан жоғары балл жинаған үміткер озады, ол да тең болса — келесі бөлім.</p>
+  </div>
+  <p class="src">Дереккөз: НЗМ ақпараттық буклеті (19.10.2026).</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">15</span></div>
+</section>
+
+<!-- 16. Answer sheet & rules -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">Жауап парағы және <em>тәртіп</em></h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>Жауап парағы</h3>
+      <ul style="margin-top:2.5mm">
+        <li>Әр күні бір жауап парағы беріледі</li>
+        <li><b>5-секторға үміткер қол қояды.</b> Қол қойылмаған парақ жарамсыз</li>
+        <li>Тек қара сиялы шарикті қаламмен толтырылады</li>
+        <li>Дөңгелекше толық боялады</li>
+        <li>Бір тапсырмаға екі жауап боялса, есептелмейді</li>
+        <li>Сызуға, қарындаш пен түзеткішке тыйым салынады</li>
+        <li>Парақты бүктеуге, жыртуға, шимай етуге болмайды</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Тыйым салынады</h3>
+      <ul style="margin-top:2.5mm">
+        <li>Жауап алмасу, көшіріп жазу</li>
+        <li>Кітап, шпаргалка, сөздік, қаламсауыт</li>
+        <li>Телефон, смарт-сағат, планшет, калькулятор, ЖИ ресурстары — дәлізде, гардеробта, әжетханада да</li>
+        <li>Уақыт біткен соң жазу, материалдарды алып шығу</li>
+        <li>Рұқсатсыз шығу, сөйлесу, орын ауыстыру</li>
+        <li>Рұқсат қағазын шимай парақ ету</li>
+        <li>Балағат сөз, құрметсіздік, жеке байланыс деректерін көрсету</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note warn"><b>Ереже бұзылса,</b> Зияткерлік мектеп кешенді тестілеу нәтижелерін жойып, үміткерді конкурстан шеттетуге құқылы.</div>
+  <div class="card lav"><h4>Үйде жаттықтырыңыз</h4><p style="margin-top:1.5mm">Сынақ тестін шығарғанда да жауапты дөңгелекшеге толық бояп белгілеуге үйретіңіз. Емтихан күні бұл әдет уақыт пен қатені үнемдейді.</p></div>
+  <p class="src">Дереккөз: НЗМ ақпараттық буклеті (19.10.2026).</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">16</span></div>
+</section>
+
+<!-- 17. Results -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">Нәтиже және <em>грант</em></h2>
+  <div class="steps">
+    <div class="step"><span class="no">1</span><div class="card"><h4>Нәтижелерді Cito өңдейді</h4><p class="small" style="margin-top:1mm">Cito Педагогикалық өлшеулер институты (Нидерланд). Әр тапсырманың күрделілігі мен бөлімдердің үлесі автоматтандырылған психометриялық талдаумен есептеледі.</p></div></div>
+    <div class="step"><span class="no">2</span><div class="card"><h4>Нәтиже nis.edu.kz сайтында жарияланады</h4><p class="small" style="margin-top:1mm">Тестілеудің соңғы күнінен бастап 40 күнтізбелік күннен кешіктірілмей, яғни 2027 жылғы 6 мамырға дейін.</p></div></div>
+    <div class="step"><span class="no">3</span><div class="card"><h4>Грант тағайындалады</h4><p class="small" style="margin-top:1mm">Мектепке бөлінген грант санына сәйкес: шекті балл жинап, жалпы балы ең жоғары үміткерлерге. Үміткерлер жалпы балл бойынша жоғарыдан төменге сараланады.</p></div></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><span class="tag r">Апелляция</span><p style="margin-top:2.5mm"><b>Өткізілмейді.</b> Үміткердің нәтижелері, тест кітапшалары мен жауап парақтары жеке қарастырылмайды.</p></div>
+    <div class="card"><span class="tag g">Неге</span><p style="margin-top:2.5mm">Ресми буклет бойынша тәсіл нәтижелерді объективті әрі сенімді бағалауды қамтамасыз етеді.</p></div>
+  </div>
+  <p class="src">Дереккөз: НЗМ ақпараттық буклеті (19.10.2026); nis.edu.kz «Конкурс жөнінде хабарлама».</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">17</span></div>
+</section>
+
+<!-- 18. 2026 thresholds -->
+<section class="page" style="gap:4mm">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">2026 конкурсы: <em>шекті балл мен грант</em></h2>
+  <p class="lead" style="font-size:10.5pt">Былтырғы конкурстың әр мектеп бойынша көрсеткіштері. Шекті балл 1500 балдық жалпы шкаладан.</p>
+  <table class="dense tight" style="font-size:8.6pt">
+    <tr><th>№</th><th>НЗМ</th><th>Қала</th><th class="num">2026 шекті балл</th><th class="num">Грант</th><th class="num">Кандидат</th></tr>
+    <tr><td>1</td><td>Астана IB</td><td>Астана</td><td class="num"><b>1297</b></td><td class="num">144</td><td class="num">1 894</td></tr>
+    <tr><td>2</td><td>Астана ФМБ</td><td>Астана</td><td class="num"><b>1281</b></td><td class="num">144</td><td class="num">1 836</td></tr>
+    <tr><td>3</td><td>Алматы ХББ</td><td>Алматы</td><td class="num"><b>1271</b></td><td class="num">144</td><td class="num">2 510</td></tr>
+    <tr><td>4</td><td>Алматы ФМБ</td><td>Алматы</td><td class="num"><b>1255</b></td><td class="num">144</td><td class="num">1 885</td></tr>
+    <tr><td>5</td><td>Шымкент ФМБ</td><td>Шымкент</td><td class="num"><b>1144</b></td><td class="num">144</td><td class="num">1 777</td></tr>
+    <tr><td>6</td><td>Түркістан ХББ</td><td>Түркістан</td><td class="num"><b>1120</b></td><td class="num">130</td><td class="num">1 580</td></tr>
+    <tr><td>7</td><td>Ақтау</td><td>Ақтау</td><td class="num"><b>1110</b></td><td class="num">130</td><td class="num">1 481</td></tr>
+    <tr><td>8</td><td>Ақтөбе ФМБ</td><td>Ақтөбе</td><td class="num"><b>1104</b></td><td class="num">130</td><td class="num">1 307</td></tr>
+    <tr><td>9</td><td>Тараз ФМБ</td><td>Тараз</td><td class="num"><b>1103</b></td><td class="num">130</td><td class="num">1 658</td></tr>
+    <tr><td>10</td><td>Атырау</td><td>Атырау</td><td class="num"><b>1087</b></td><td class="num">130</td><td class="num">1 733</td></tr>
+    <tr><td>11</td><td>Қарағанды</td><td>Қарағанды</td><td class="num"><b>1077</b></td><td class="num">130</td><td class="num">1 053</td></tr>
+    <tr><td>12</td><td>Шымкент ХББ</td><td>Шымкент</td><td class="num"><b>1070</b></td><td class="num">144</td><td class="num">1 149</td></tr>
+    <tr><td>13</td><td>Көкшетау ФМБ</td><td>Көкшетау</td><td class="num"><b>1049</b></td><td class="num">130</td><td class="num">781</td></tr>
+    <tr><td>14</td><td>Қызылорда ХББ</td><td>Қызылорда</td><td class="num"><b>1036</b></td><td class="num">130</td><td class="num">1 664</td></tr>
+    <tr><td>15</td><td>Орал ФМБ</td><td>Орал</td><td class="num"><b>1036</b></td><td class="num">130</td><td class="num">1 182</td></tr>
+    <tr><td>16</td><td>Өскемен ХББ</td><td>Өскемен</td><td class="num"><b>999</b></td><td class="num">130</td><td class="num">802</td></tr>
+    <tr><td>17</td><td>Павлодар ХББ</td><td>Павлодар</td><td class="num"><b>990</b></td><td class="num">130</td><td class="num">768</td></tr>
+    <tr><td>18</td><td>Семей ФМБ</td><td>Семей</td><td class="num"><b>942</b></td><td class="num">130</td><td class="num">729</td></tr>
+    <tr><td>19</td><td>Қостанай</td><td>Қостанай</td><td class="num"><b>897</b></td><td class="num">130</td><td class="num">568</td></tr>
+    <tr><td>20</td><td>Петропавл</td><td>Петропавл</td><td class="num"><b>889</b></td><td class="num">130</td><td class="num">594</td></tr>
+  </table>
+  <div class="grid2">
+    <div class="card lav" style="padding:4mm 5mm"><p class="small" style="color:var(--ink)"><b>ФМБ</b> — физика-математика бағыты, <b>ХББ</b> — химия-биология бағыты. Мектептерге 130 не 144 грант бөлінген.</p></div>
+    <div class="note" style="padding:3mm 4mm"><p class="small" style="color:var(--ink)">Бұл — 2026 жылғы көрсеткіш. Грант мектептің грант санына қарай ең жоғары жалпы балл жинағандарға беріледі, сондықтан 2027 жылы шекті балл басқа болуы мүмкін.</p></div>
+  </div>
+  <p class="src">Дереккөз: esqat.qr Instagram, «2026 жылғы көрсеткіштер» (nis.edu.kz деректері деп көрсетілген). Талдықорған НЗМ постта жоқ.</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">18</span></div>
+</section>
+
+<!-- 18. Schools -->
+<section class="page" style="gap:4mm">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip nis">НЗМ</span></div>
+  <h2 class="title">21 НЗМ: <em>мекенжай мен телефон</em></h2>
+  <table class="dense" style="font-size:8.6pt">
+    <tr><th>№</th><th>Мектеп</th><th>Мекенжайы</th><th>Телефон</th></tr>
+    <tr><td>1</td><td>Астана-Нұра НЗМ</td><td>Хусейн бен Талал к-сі, 21</td><td>8 (7172) 57-57-85</td></tr>
+    <tr><td>2</td><td>Астана НЗМ</td><td>Хусейн бен Талал к-сі, 19</td><td>8 (7172) 55-80-33</td></tr>
+    <tr><td>3</td><td>Алматы-Медеу НЗМ</td><td>Горный Гигант ы.а., Жамақаев к-сі, 145</td><td>8 (727) 331-01-00</td></tr>
+    <tr><td>4</td><td>Алматы-Наурызбай НЗМ</td><td>Қалқаман-2 ы.а., Елібаев к-сі, 2</td><td>8 (727) 338-33-00</td></tr>
+    <tr><td>5</td><td>Ақтау НЗМ</td><td>33 ы.а., 16 ғимарат</td><td>8 (7292) 70-10-66</td></tr>
+    <tr><td>6</td><td>Ақтөбе НЗМ</td><td>Мәңгілік Ел к-сі, 8</td><td>8 (7132) 41-17-37</td></tr>
+    <tr><td>7</td><td>Атырау НЗМ</td><td>Нұрсая ы.а., Елорда даңғ., 22</td><td>8 (7122) 55-85-51</td></tr>
+    <tr><td>8</td><td>Қарағанды НЗМ</td><td>Шахтерлер даңғ., 62</td><td>8 (7212) 50-78-55</td></tr>
+    <tr><td>9</td><td>Көкшетау НЗМ</td><td>Ж. Тлеулин к-сі, 59</td><td>8 (7162) 25-31-40</td></tr>
+    <tr><td>10</td><td>Қостанай НЗМ</td><td>Нұрсұлтан Назарбаев даңғ., 239</td><td>8 (7142) 39-06-70</td></tr>
+    <tr><td>11</td><td>Қызылорда НЗМ</td><td>Сұлтан Бейбарыс к-сі, 6</td><td>8 (7242) 40-23-75</td></tr>
+    <tr><td>12</td><td>Павлодар НЗМ</td><td>Ткачев к-сі, 16/2</td><td>8 (7182) 66-34-10</td></tr>
+    <tr><td>13</td><td>Петропавл НЗМ</td><td>И. Ибраев к-сі, 22А</td><td>8 (7152) 55-97-28</td></tr>
+    <tr><td>14</td><td>Семей НЗМ</td><td>Қарағайлы ы.а., 1</td><td>8 (7222) 63-63-50</td></tr>
+    <tr><td>15</td><td>Өскемен НЗМ</td><td>Қ. Сәтпаев даңғ., 53</td><td>8 (7232) 71-27-15</td></tr>
+    <tr><td>16</td><td>Талдықорған НЗМ</td><td>Қаратал ы.а., №47</td><td>8 (7282) 40-00-69</td></tr>
+    <tr><td>17</td><td>Тараз НЗМ</td><td>Арай массиві, Домалақ ана к-сі, 266</td><td>8 (7262) 99-98-56</td></tr>
+    <tr><td>18</td><td>Түркістан НЗМ</td><td>Жаңа қала ы.а., 32 көше, 13</td><td>8 (7253) 35-99-89</td></tr>
+    <tr><td>19</td><td>Орал НЗМ</td><td>Тәуелсіздік к-сі, 16</td><td>8 (7112) 24-65-12</td></tr>
+    <tr><td>20</td><td>Шымкент-Абай НЗМ</td><td>Ақжайық ы.а., Элитный қалашығы, 6</td><td>8 (7252) 29-44-88</td></tr>
+    <tr><td>21</td><td>Шымкент-Қаратау НЗМ</td><td>Нұрсәт ы.а., 1А</td><td>8 (7252) 77-55-33</td></tr>
+  </table>
+  <p class="src">Дереккөз: nis.edu.kz «Конкурс жөнінде хабарлама». Кейбір мектептердің екінші телефоны сайтта көрсетілген. Мектептердің сайттары: schools.nis.edu.kz</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">19</span></div>
+</section>
+
+<!-- 19. Divider BIL -->
+<section class="page divider" style="background:linear-gradient(150deg,#2FBF71 0%,#1F9D57 45%,#0F6B3A 100%)">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip" style="background:var(--yellow);color:var(--ink)">2-бөлім</span></div>
+  <div class="planet" style="width:90mm;height:90mm;right:-25mm;top:30mm;background:radial-gradient(circle at 35% 30%,#8FF0B8,#138A4B);opacity:.5"></div>
+  <div class="stack" style="gap:8mm;position:relative">
+    <div class="big">«Білім-<br>инновация»<br>лицейлері <span>(БИЛ)</span></div>
+    <p class="sub">bilemtihan.kz-те тіркелу, 2 мамырдағы емтихан, нәтиже, апелляция және 15% квота</p>
+    <div class="list">
+      <div><b>20</b>БИЛ туралы</div>
+      <div><b>21</b>bilemtihan.kz-те тіркелу</div>
+      <div><b>22</b>Емтихан құрылымы</div>
+      <div><b>23</b>Нәтиже, апелляция, квота</div>
+    </div>
+  </div>
+  <div class="foot" style="color:rgba(255,255,255,.75)"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n" style="color:var(--yellow)">19</span></div>
+</section>
+
+<!-- 20. About BIL -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip bil">БИЛ</span></div>
+  <h2 class="title">БИЛ <em style="color:var(--green)">туралы</em></h2>
+  <p class="lead">«Білім-инновация» лицейлеріне қабылдау бір ортақ емтихан арқылы өтеді. Тіркелу мен нәтиже — bilemtihan.kz сайтында.</p>
+  <div class="grid2">
+    <div class="card"><h3>Ұлдар мен қыздарға бөлек</h3><p style="margin-top:2mm">Сайттағы картада ұлдар лицейлері, қыздар лицейлері және арнайы бағыттағы лицейлер (мысалы, IB бағдарламасы, IT) көрсетілген. Өз облысыңыздағы лицейді таңдайсыз.</p></div>
+    <div class="card"><h3>Ақысы</h3><p style="margin-top:2mm">Емтихан тегін. Лицейлерде ақылы бөлім қарастырылмаған.</p></div>
+    <div class="card"><h3>Мектеп бағасы</h3><p style="margin-top:2mm">Конкурстық іріктеуде табельдегі бағалар есепке алынбайды.</p></div>
+    <div class="card"><h3>Қанша оқушы алынады</h3><p style="margin-top:2mm">Лицей ғимаратының жобалық сыйымдылығына қарай бекітіледі.</p></div>
+  </div>
+  <div class="card purple" style="background:linear-gradient(135deg,#2FBF71,#1F9D57 55%,#0F6B3A)">
+    <h3>«Өту балы» жоқ</h3>
+    <p style="margin-top:2mm">Лицейге тестілеудің рейтинг көрсеткіші бойынша ең жоғары балл жинаған оқушылар алынады. Сондықтан нақты бір «өту балы» болмайды: мақсат — мүмкіндігінше жоғары балл.</p>
+  </div>
+  <div class="grid2">
+    <div class="note"><b>Сынақ тестілеу</b> bilemtihan.kz сайтында қолжетімді болады.</div>
+    <div class="note"><b>Байланыс орталығы:</b> +7 700 000 00 00</div>
+  </div>
+  <p class="src">Дереккөз: bilemtihan.kz, «Жиі қойылатын сұрақтар» (тексерілді: 07.11.2026).</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">21</span></div>
+</section>
+
+<!-- 21. BIL registration -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip bil">БИЛ</span></div>
+  <h2 class="title">bilemtihan.kz-те <em style="color:var(--green)">тіркелу</em></h2>
+  <div class="card purple" style="background:linear-gradient(135deg,#2FBF71,#1F9D57 55%,#0F6B3A)">
+    <span class="tag y">Тіркелу мерзімі</span>
+    <div class="kpi" style="margin-top:3mm">2 қараша 2026 – 2 сәуір 2027</div>
+  </div>
+  <div class="steps">
+    <div class="step"><span class="no" style="background:var(--green)">1</span><div class="card"><h4>bilemtihan.kz сайтына кіріңіз</h4><p class="small" style="margin-top:1mm">Картадан өз облысыңыздағы «Білім-инновация» лицейін таңдаңыз.</p></div></div>
+    <div class="step"><span class="no" style="background:var(--green)">2</span><div class="card"><h4>Өтініш нысанын толтырыңыз</h4><p class="small" style="margin-top:1mm">Нысан сайттың өзінде. Онлайн-өтінішті толтыру туралы сайтта қадамдық бейненұсқаулық бар.</p></div></div>
+    <div class="step"><span class="no" style="background:var(--green)">3</span><div class="card"><h4>Құжаттарды жүктеңіз</h4><p class="small" style="margin-top:1mm">ЖСН көрсетілген туу туралы куәлік — тек PDF. 3×4 фотосурет — JPG немесе JPEG.</p></div></div>
+    <div class="step"><span class="no" style="background:var(--green)">4</span><div class="card"><h4>Рұқсаттаманы (пропуск) күтіңіз</h4><p class="small" style="margin-top:1mm">Тіркелгеннен кейін 3 жұмыс күні ішінде ата-ананың WhatsApp-ына немесе электрондық поштасына жіберіледі.</p></div></div>
+  </div>
+  <div class="note"><b>Қате жібердіңіз бе?</b> Өтінішті толтырғанда қате тапсаңыз, таңдаған лицейдің жауапты адамына хабарласыңыз.</div>
+  <p class="src">Дереккөз: bilemtihan.kz (тексерілді: 07.11.2026).</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">22</span></div>
+</section>
+
+<!-- 22. BIL exam -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip bil">БИЛ</span></div>
+  <h2 class="title">БИЛ <em style="color:var(--green)">емтиханы</em></h2>
+  <div class="grid3">
+    <div class="card purple" style="background:linear-gradient(135deg,#2FBF71,#1F9D57 55%,#0F6B3A)"><div class="kpi">2 мамыр</div><p style="font-weight:700">2027 жыл</p></div>
+    <div class="card yellow"><div class="kpi">60</div><p style="font-weight:700">сұрақ</p></div>
+    <div class="card"><div class="kpi" style="color:var(--green)">110</div><p style="font-weight:700">минут</p></div>
+  </div>
+  <table>
+    <tr><th>Бөлім</th><th class="num">Сұрақ саны</th></tr>
+    <tr><td>Математика және логика</td><td class="num">50</td></tr>
+    <tr><td>Оқу сауаттылығы</td><td class="num">10</td></tr>
+    <tr class="total"><td>Барлығы · қазақ немесе орыс тілінде</td><td class="num">60</td></tr>
+  </table>
+  <div class="card">
+    <h3>Емтихан күні өзімен бірге</h3>
+    <div class="grid3" style="margin-top:3mm">
+      <div class="card lav"><h4>Туу туралы куәлік</h4><p class="small">Түпнұсқасы</p></div>
+      <div class="card lav"><h4>Рұқсаттама</h4><p class="small">Қағазға басып шығарылған</p></div>
+      <div class="card lav"><h4>Қалам</h4><p class="small">Қара немесе көк сиялы</p></div>
+    </div>
+  </div>
+  <div class="note"><b>Назар аударыңыз:</b> 2027 жылғы ресми құрылымда Қазақстан тарихы бөлімі жоқ. Емтиханның <b>83%-ы</b> (60 сұрақтың 50-і) — математика мен логика.</div>
+  <p class="src">Дереккөз: bilemtihan.kz (тексерілді: 07.11.2026).</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">23</span></div>
+</section>
+
+<!-- 23. BIL results -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip bil">БИЛ</span></div>
+  <h2 class="title">Нәтиже, апелляция, <em style="color:var(--green)">15% квота</em></h2>
+  <div class="grid2">
+    <div class="card"><span class="tag g">Нәтиже</span><h3 style="margin-top:2.5mm">10 мамыр 2027</h3><p style="margin-top:1.5mm">bilemtihan.kz сайтындағы жеке кабинетте жарияланады.</p></div>
+    <div class="card"><span class="tag g">Апелляция</span><h3 style="margin-top:2.5mm">Беруге болады</h3><p style="margin-top:1.5mm">Өтініш беру үшін лицей өкіліне хабарласыңыз.</p></div>
+  </div>
+  <div class="card">
+    <h3>Апелляция комиссиясы қабылдамайтын өтініштер</h3>
+    <ul style="margin-top:2.5mm">
+      <li>Тест тапсырмаларының мазмұны мен құрылымы туралы</li>
+      <li>Үміткер белгіленген тәртіп ережесін бұзғанына байланысты</li>
+      <li>Үміткер жауап парағын қате толтырғанына байланысты</li>
+      <li>Әр тапсырма бойынша негіздемесіз барлық тапсырманы қайта қарау туралы</li>
+    </ul>
+  </div>
+  <div class="card lav">
+    <h3>15% квота: әлеуметтік осал санаттар</h3>
+    <ul style="margin-top:2.5mm;font-size:9.8pt">
+      <li>Мемлекеттік атаулы әлеуметтік көмек алатын ауыл отбасыларының балалары</li>
+      <li>Ата-анасының бірі І топтағы мүгедек балалар</li>
+      <li>Мүгедектігі бар бала тәрбиелеп отырған отбасылар</li>
+      <li>Жетім балалар және ата-ана қамқорлығынсыз қалған балалар, оның ішінде отбасында тұратындар</li>
+      <li>Төтенше жағдайлар салдарынан шұғыл көмекті қажет ететін отбасылардың балалары</li>
+      <li>Экологиялық апаттар, табиғи және техногендік төтенше жағдайлар салдарынан баспанасынан айырылған отбасылар</li>
+      <li>Аналары «Алтын алқа», «Күміс алқа» алқаларымен марапатталған немесе бұрын «Батыр ана» атағын алған, сондай-ақ І және ІІ дәрежелі «Ана даңқы» ордендерімен марапатталған көп балалы отбасылардың балалары</li>
+    </ul>
+  </div>
+  <p class="src">Дереккөз: bilemtihan.kz, «Жиі қойылатын сұрақтар» (тексерілді: 07.11.2026).</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">24</span></div>
+</section>
+
+<!-- 24. Divider Prep -->
+<section class="page divider" style="background:linear-gradient(150deg,#1E1640 0%,#2A1B66 50%,#4A1BB0 100%)">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip" style="background:var(--yellow);color:var(--ink)">3-бөлім</span></div>
+  <div class="planet" style="width:80mm;height:80mm;right:-20mm;top:40mm;background:radial-gradient(circle at 35% 30%,#FFE98A,#FFB800);opacity:.9"></div>
+  <div class="stack" style="gap:8mm;position:relative">
+    <div class="big">Дайындық<br><span>жоспары</span></div>
+    <p class="sub">Қарашадан мамырға дейін: не істейміз, уақытты қалай бөлеміз, ата-ана қалай қолдайды</p>
+    <div class="list">
+      <div><b>25</b>Дайындық жоспары</div>
+      <div><b>26</b>Уақытты бөлу</div>
+      <div><b>27</b>Сәтті үміткерлердің кеңесі</div>
+      <div><b>28</b>Ата-анаға</div>
+      <div><b>29</b>«8 планета» — EduApp App</div>
+    </div>
+  </div>
+  <div class="foot" style="color:rgba(255,255,255,.75)"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n" style="color:var(--yellow)">24</span></div>
+</section>
+
+<!-- 25. Prep plan -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip prep">Дайындық</span></div>
+  <h2 class="title">Дайындық жоспары: <em>қарашадан мамырға дейін</em></h2>
+  <p class="lead">Жоспар екі емтиханды да қамтиды: НЗМ — 26–27 наурыз, БИЛ — 2 мамыр. Аптасына кемінде 5 күн, күніне 1–2 сағат жүйелі жаттығу.</p>
+  <div class="tl">
+    <div class="ev"><span class="d">Қараша–желтоқсан</span><span><b>Негізді бекіту.</b> Математика мен тілдердегі деңгейді анықтау, 5–6-сыныптың игерілмеген тақырыптарын қайталау. НЗМ-ге құжат тапсыру, БИЛ-ге тіркелу.</span><span class="tag">1</span></div>
+    <div class="ev"><span class="d">Қаңтар–ақпан</span><span><b>Жүйелі жаттығу.</b> Барлық бөлім, бірақ басымдық — математика мен сандық сипаттамалар: шекті балл тек осы екеуінде. Тапсырма түрлерін ауыстырып отыру.</span><span class="tag">2</span></div>
+    <div class="ev key"><span class="d">1–25 наурыз</span><span><b>Толық сынақтар.</b> 2 сағаттық толық тест, таймермен, телефонсыз. Жаңа тақырып емес — қате кеткен тақырыптар.</span><span class="tag y">3</span></div>
+    <div class="ev"><span class="d">26–27 наурыз</span><span><b>НЗМ кешенді тесті.</b></span><span class="tag">НЗМ</span></div>
+    <div class="ev bil"><span class="d">Сәуір</span><span><b>БИЛ форматы.</b> 60 сұраққа 110 минут, математика мен логикаға басымдық, оқу сауаттылығы.</span><span class="tag g">4</span></div>
+    <div class="ev key"><span class="d">2 мамыр</span><span><b>БИЛ емтиханы.</b></span><span class="tag y">БИЛ</span></div>
+  </div>
+  <div class="card">
+    <h3>Ресми дайындық материалдары</h3>
+    <ul style="margin-top:2.5mm">
+      <li>nis.edu.kz → «Оқуға түсуге дайындық»: конкурстық іріктеу тапсырмаларының үлгілері, байқау тестілеуі, оқыту онлайн-курсы</li>
+      <li>bilemtihan.kz: сынақ тестілеу (сайтта қолжетімді болады)</li>
+    </ul>
+  </div>
+  <p class="src">Жоспар EduApp Online School гайдының ұсыныстары негізінде 2027 жылғы ресми күндерге бейімделді.</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">26</span></div>
+</section>
+
+<!-- 26. Time -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip prep">Дайындық</span></div>
+  <h2 class="title">Уақытты бөлу: <em>бір сұраққа қанша уақыт</em></h2>
+  <p class="lead">Ресми уақыт пен тапсырма санынан есептелген орташа уақыт. Ең тығыз бөлім — сандық сипаттамалар.</p>
+  <div class="card">
+    <div class="bars">
+      <div class="bar"><span>НЗМ · Сандық сипаттамалар</span><div class="track"><div class="fill" style="width:25%;background:linear-gradient(90deg,#FF9A8B,#E0473B)"></div></div><span class="v">30 сек</span></div>
+      <div class="bar"><span>НЗМ · Математика</span><div class="track"><div class="fill" style="width:75%"></div></div><span class="v">1 мин 30 сек</span></div>
+      <div class="bar"><span>НЗМ · Жаратылыстану</span><div class="track"><div class="fill" style="width:75%"></div></div><span class="v">1 мин 30 сек</span></div>
+      <div class="bar"><span>БИЛ · Барлық тест</span><div class="track"><div class="fill" style="width:91.7%;background:linear-gradient(90deg,#5DD99A,#1F9D57)"></div></div><span class="v">≈1 мин 50 сек</span></div>
+      <div class="bar"><span>НЗМ · Тілдік тест</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="v">2 мин</span></div>
+    </div>
+    <p class="small" style="margin-top:3mm">Есеп: сандық сипаттамалар 30 мин : 60; математика 60 мин : 40; жаратылыстану 30 мин : 20; БИЛ 110 мин : 60; тілдік тест 120 мин : 60.</p>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>Тест кезінде</h3><ul style="margin-top:2.5mm"><li>Алдымен білетініңнің бәрін шығар</li><li>Бір қиын тапсырмаға тұрып қалма: белгілеп, соңына қалдыр</li><li>Сандық сипаттамада алдымен жеңіл салыстыруларды шеш</li></ul></div>
+    <div class="card"><h3>Тілдік тестте</h3><ul style="margin-top:2.5mm"><li>Асықпа: уақыт жеткілікті</li><li>Алдымен сұрақтарды, сосын мәтінді оқу көмектеседі</li><li>Жауапты мәтіннен тауып, тексер</li></ul></div>
+  </div>
+  <p class="src">Уақыт: НЗМ ақпараттық буклеті, bilemtihan.kz. Кеңестер: EduApp Online School гайды.</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">27</span></div>
+</section>
+
+<!-- 27. Tips -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip prep">Дайындық</span></div>
+  <h2 class="title">Сәтті үміткерлердің <em>кеңесі</em></h2>
+  <div class="grid2">
+    <div class="card"><span class="tag">01</span><h3 style="margin:2.5mm 0 1.5mm">Ерте және жоспармен баста</h3><p>Неғұрлым ерте бастасаң, соғұрлым жақсы. Күнделікті кішкентай қадамдар емтихан алдындағы ретсіз серпілістен тиімді.</p></div>
+    <div class="card"><span class="tag">02</span><h3 style="margin:2.5mm 0 1.5mm">Математиканы мұқият үйрен</h3><p>Математика — емтиханның негізі және шекті балы бар бөлім (140). Пайыз, бөлшек, пропорция, геометрия, қозғалыс есептері — түсініксіз тақырып қалмасын.</p></div>
+    <div class="card"><span class="tag">03</span><h3 style="margin:2.5mm 0 1.5mm">Шешім жылдамдығын жаттықтыр</h3><p>Сандық сипаттамада бір тапсырмаға 30 секунд. Жылдам салыстыруды күнде аз-аздан жаттықтыр.</p></div>
+    <div class="card"><span class="tag">04</span><h3 style="margin:2.5mm 0 1.5mm">Жаттама, түсін</h3><p>Шешімдерді есте сақтаудың пайдасы жоқ — емтиханға басқа нұсқа түседі. Бала жауабының неге дұрыс екенін өзі түсіндіре алса, тақырып игерілген.</p></div>
+    <div class="card"><span class="tag">05</span><h3 style="margin:2.5mm 0 1.5mm">Үш тілде мәтін оқы</h3><p>Тілдік тестке қазақ, орыс, ағылшын тілдеріндегі мәтіндерді оқу әдеті керек. Оқығанын өз сөзімен айтып беру — жақсы жаттығу.</p></div>
+    <div class="card"><span class="tag">06</span><h3 style="margin:2.5mm 0 1.5mm">Нақты жағдайда сынақ жаса</h3><p>Үстел, тыныштық, телефон жоқ, таймер 2 сағат. Бірнеше осындай сынақтан кейін нақты емтихан қорқынышты болмайды.</p></div>
+  </div>
+  <p class="src">EduApp Online School гайдындағы «Сәтті үміткерлердің кеңесі» бөлімінен қысқартылды.</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">28</span></div>
+</section>
+
+<!-- 28. Parents -->
+<section class="page">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip prep">Дайындық</span></div>
+  <h2 class="title">Ата-анаға: <em>қолдау және тест күні</em></h2>
+  <div class="grid2">
+    <div class="card"><h3>Дайындық кезінде</h3><ul style="margin-top:2.5mm"><li>Кішкентай жетістіктері үшін де мақтаңыз</li><li>Шаршағанын байқасаңыз — үзіліс немесе демалыс күні</li><li>Басқа балалармен салыстырмаңыз</li><li>Ұйқы мен тамақтану режимін қадағалаңыз</li></ul></div>
+    <div class="card"><h3>Психологиялық дайындық</h3><ul style="margin-top:2.5mm"><li>Қобалжығанда терең тыныс алуды үйретіңіз</li><li>«Мен дайынмын, мен оны жеңе аламын» деген көзқарас</li><li>Емтихан — өмір мен өлім емес, білімін көрсету мүмкіндігі</li></ul></div>
+  </div>
+  <div class="card purple">
+    <h3>Тест күнгі сөмке</h3>
+    <div class="grid2" style="margin-top:3mm">
+      <div><span class="tag y">НЗМ · 26–27 наурыз</span><ul style="margin-top:2mm"><li>Түрлі-түсті басылған рұқсат қағазы</li><li>Қара сиялы қалам</li><li>Жапсырмасы жоқ бөтелкедегі су</li></ul></div>
+      <div><span class="tag y">БИЛ · 2 мамыр</span><ul style="margin-top:2mm"><li>Туу туралы куәліктің түпнұсқасы</li><li>Басып шығарылған рұқсаттама</li><li>Қара немесе көк сиялы қалам</li></ul></div>
+    </div>
+  </div>
+  <div class="note"><b>Алдыңғы күні:</b> жаңа тақырып оқымаңыз, ерте ұйықтаңыз, таңертең таңғы ас. НЗМ-де кешіккен бала тестке кіргізілмейді — жолға уақытты артығымен қалдырыңыз.</div>
+  <p class="src">Тест күнгі заттар: НЗМ ақпараттық буклеті, bilemtihan.kz. Кеңестер: EduApp Online School гайды.</p>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">29</span></div>
+</section>
+
+<!-- 29. 8 planeta -->
+<section class="page" style="background:linear-gradient(160deg,#F5F0FF 0%,#E9E0FF 100%)">
+  <div class="top"><div class="brand"><svg><use href="#logo"/></svg>EduApp App</div><span class="chip prep">EduApp App</span></div>
+  <div class="card purple" style="padding:8mm">
+    <span class="tag y">6-сыныпқа · қазақ тілінде</span>
+    <h2 style="font-size:30pt;font-weight:900;margin-top:3mm">«8 планета»</h2>
+    <p style="font-size:12pt;font-weight:600;margin-top:2mm">НЗМ-нің 1-күнінің форматындағы 1 айлық дайындық</p>
+  </div>
+  <div class="grid2">
+    <div class="card"><div class="kpi" style="color:var(--p2)">40</div><p style="font-weight:700">математика сұрағы әр нұсқада — НЗМ-дегідей 40</p></div>
+    <div class="card"><div class="kpi" style="color:var(--p2)">60</div><p style="font-weight:700">сандық сипаттама сұрағы әр нұсқада — НЗМ-дегідей 60</p></div>
+  </div>
+  <div class="card">
+    <ul>
+      <li><b>Айына 16 нұсқа, 800 сұрақ:</b> 8 планета, әр планетада математика мен сандық сипаттамадан бір-бір нұсқа</li>
+      <li><b>Мектеп КТП-сы бойынша:</b> бала сыныпта өтіп жатқан тақырыпты НЗМ форматында бекітеді</li>
+      <li><b>Қате жауап берсе,</b> есептің толық шешуі сол сәтте ашылады</li>
+      <li><b>Тест соңында</b> ұпай бірден шығады, тақырыптар бойынша анализ — analytics.example.com</li>
+      <li><b>Уақыт шектелмеген.</b> НЗМ қарқынына жаттығу үшін таймерді өзіңіз қойыңыз: математика — 60 мин, сандық сипаттамалар — 30 мин</li>
+    </ul>
+  </div>
+  <div class="note">Курс шекті балл қойылатын екі бөлімді қамтиды: математика мен сандық сипаттамалар. Жаратылыстану мен тілдік тест курсқа кірмейді.</div>
+  <div class="grid2">
+    <div class="card yellow"><h4>Курс қайда</h4><p style="font-weight:700;margin-top:1mm">eduapp.example.com сайты немесе EduApp App қосымшасы</p></div>
+    <div class="card"><h4>Сұрақтар</h4><p style="font-weight:700;margin-top:1mm">wa.me/77000000000 · Instagram: @eduapp_demo</p></div>
+  </div>
+  <div class="foot"><span>НЗМ мен БИЛ-ге түсу гайды 2027</span><span class="n">30</span></div>
+</section>
+
+<!-- 30. Sources & back -->
+<section class="page cover" style="justify-content:space-between">
+  <div class="brand"><svg><use href="#logo"/></svg>EduApp App</div>
+  <div class="card" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:var(--white)">
+    <h3>Дереккөздер</h3>
+    <ol style="margin-top:3mm;font-size:9.4pt">
+      <li>nis.edu.kz — «Конкурс жөнінде хабарлама» (2027–2028 оқу жылы)</li>
+      <li>nis.edu.kz — «Құжаттар тізімі»</li>
+      <li>НЗМ: «7-сыныптарына оқушыларды конкурстық іріктеуді өткізу тәртібі туралы үміткерлер мен олардың ата-аналарына арналған ақпараттық буклет» (сайтта жаңартылған: 19.10.2026)</li>
+      <li>bilemtihan.kz — тіркелу, емтихан, жиі қойылатын сұрақтар (тексерілді: 07.11.2026)</li>
+      <li>НЗМ баспасөз қызметі, kaz.nur.kz, 30.03.2026 — өтінім саны</li>
+      <li>esqat.qr Instagram парақшасы — НЗМ 2027 күндері, тест құрылымы, 2026 жылғы шекті балдар мен гранттар</li>
+      <li>EduApp Online School, «Дарынды балаларға арналған мектептерге түсу гайды» — дайындық кеңестері</li>
+    </ol>
+  </div>
+  <div class="stack" style="gap:5mm">
+    <p style="font-size:20pt;font-weight:900;line-height:1.1">Балаларыңызға сәттілік тілейміз!</p>
+    <p style="font-weight:600;opacity:.9">Мерзімдер мен ережелер өзгеруі мүмкін. Тапсырар алдында ресми сайттардан тексеріңіз.</p>
+    <div style="display:flex;gap:4mm;flex-wrap:wrap">
+      <span class="pill y">@eduapp_demo</span>
+      <span class="pill">eduapp.example.com</span>
+      <span class="pill">Техқолдау: 8 700 000 00 00</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
