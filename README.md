@@ -36,9 +36,9 @@ chrome --headless --print-to-pdf=guide.pdf --no-pdf-header-footer guide.html
 
 > All data in this repository is randomly generated; brand names are anonymized. "EduApp", its logo, handles and contact numbers are fictional. Admission rules, dates and school addresses are taken from public official sources (nis.edu.kz, bilemtihan.kz) and may change — always verify there.
 
-## Қысқаша (KZ)
+## Кратко (RU)
 
-НЗМ мен БИЛ-ге 2027 жылы түсу бойынша ата-аналарға арналған 31 беттік A4 гайд, толығымен HTML + CSS-пен жасалған.
-Браузерде ашып, «Басып шығару → PDF ретінде сақтау» арқылы дайын буклет аласыз.
-Мерзімдер, құжаттар, емтихан құрылымы, шекті балдар және дайындық жоспары ресми дереккөздерге сүйенеді.
-Қаріп — Montserrat (SIL OFL 1.1). Бренд атаулары мен байланыс деректері ойдан шығарылған.
+31-страничный A4-гайд для родителей о поступлении в НИШ и БИЛ в 2027 году, полностью на HTML + CSS.
+Откройте в браузере и сохраните через «Печать → Сохранить как PDF» — получится готовый буклет.
+Сроки, документы, структура экзаменов, проходные баллы и план подготовки основаны на официальных источниках.
+Шрифт — Montserrat (SIL OFL 1.1). Названия брендов и контакты вымышлены.
